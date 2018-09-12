@@ -53,7 +53,7 @@ class MazeEdge(object):
         self.node_a.connect_with(self.node_b)
         self.node_b.connect_with(self.node_a)
 
-class ForgeMaze(object):
+class Maze(object):
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
@@ -161,9 +161,9 @@ if __name__ == '__main__':
     parser.add_argument('--cols', help='How many columns in the rectangular maze. Default is 20', type=str)
     args = parser.parse_args()
     
-    rows = args.rows if args.rows else 20
-    cols = args.cols if args.cols else 20
+    rows = int(args.rows) if args.rows else 20
+    cols = int(args.cols) if args.cols else 20
     
-    maze = ForgeMaze(rows, cols)
+    maze = Maze(rows, cols)
     maze.generate()
     print(maze.print())
