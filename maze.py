@@ -72,14 +72,14 @@ class Maze(object):
         for i in range(self.rows):
             for j in range(self.cols):
                 self.matrix[i][j].reset()
-        singleton_count = self.rows * self.cols
+        count = self.rows * self.cols
         random.shuffle(self.edge_list)
         for i in range(len(self.edge_list)):
             edge = self.edge_list[i]
             if not edge.node_a.is_connected_with(edge.node_b):
                 edge.make_connection()
-                singleton_count -= 1
-                if singleton_count == 1:
+                count -= 1
+                if count == 1:
                     break
 
     @staticmethod
