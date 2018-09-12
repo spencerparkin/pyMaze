@@ -153,17 +153,23 @@ class Maze(object):
                         flag_matrix[i * 2 + 2][j * 2 + 1] = 0
                         flag_matrix[i * 2 + 2][j * 2 + 0] &= ~MazeFlag.RIGHT
                         flag_matrix[i * 2 + 2][j * 2 + 2] &= ~MazeFlag.LEFT
+            flag_matrix[0][1] = 0
+            flag_matrix[self.rows * 2][self.cols * 2 - 1] = 0
             return self.print_flag_matrix(flag_matrix, self.rows * 2 + 1, self.cols * 2 + 1)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--rows', help='How many rows in the rectangular maze. Default is 20', type=str)
     parser.add_argument('--cols', help='How many columns in the rectangular maze. Default is 20', type=str)
+    parser.add_argument('--seed', help='Provide random number generator seed.', type=str)
     args = parser.parse_args()
+    
+    # TODO: Add an optional command-line argument that, if given, will show the maze solution.
     
     rows = int(args.rows) if args.rows else 20
     cols = int(args.cols) if args.cols else 20
+    seed = int(args.seed) if args.seed else None
     
     maze = Maze(rows, cols)
-    maze.generate()
+    maze.generate(seed)
     print(maze.print())
